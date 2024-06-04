@@ -13,9 +13,7 @@ public class BasicApp {
     var app = Javalin.create(config -> {
           config.useVirtualThreads = true;
 
-          config.requestLogger.http((ctx, ms) -> {
-            LOG.info("{} {} took {} ms", ctx.method(), ctx.path(), ms);
-          });
+          config.requestLogger.http((ctx, ms) -> LOG.info("{} {} took {} ms", ctx.method(), ctx.path(), ms));
 
           config.router.mount(router -> {
             router.get("/", ctx -> ctx.redirect("/hello"));

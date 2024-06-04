@@ -15,12 +15,10 @@ public class WebSocketApp {
       config.staticFiles.enableWebjars();
     });
 
-    app.ws("/chat", ws -> {
-      ws.onMessage(ctx -> {
-        LOG.info("Received message: {}", ctx.message());
-        ctx.send(ctx.message());
-      });
-    });
+    app.ws("/chat", ws -> ws.onMessage(ctx -> {
+      LOG.info("Received message: {}", ctx.message());
+      ctx.send(ctx.message());
+    }));
 
     app.start(9090);
   }
