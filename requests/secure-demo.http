@@ -1,0 +1,22 @@
+### redirects to /hello
+GET http://localhost:8080/
+
+### displays "Hello, Javalin!"
+GET http://localhost:8080/hello
+
+### no credentials
+GET http://localhost:8080/employees
+
+### returns the list of all employees
+GET http://localhost:8080/employees
+Authorization: Basic admin admin
+
+### insufficient access
+DELETE http://localhost:8080/employees/1
+Authorization: Basic user user
+
+### deletes an employee
+DELETE http://localhost:8080/employees/1
+Authorization: Basic admin admin
+
+###

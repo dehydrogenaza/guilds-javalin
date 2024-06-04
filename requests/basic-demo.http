@@ -1,0 +1,26 @@
+### redirects to /hello
+GET http://localhost:7070/
+
+### displays "Hello, Javalin!"
+GET http://localhost:7070/hello
+
+### returns the list of all employees
+GET http://localhost:7070/employees
+
+### returns a specific (existing) employee
+GET http://localhost:7070/employees/1
+
+### returns an error if specific employee is not found
+GET http://localhost:7070/employees/999
+
+### saves an employee
+POST http://localhost:7070/employees
+Content-Type: application/json
+
+{
+  "name": "Tata Muminka",
+  "email": "tata@muminki.fi",
+  "salary": 10000
+}
+
+###
