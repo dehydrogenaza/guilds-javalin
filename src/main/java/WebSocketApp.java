@@ -9,18 +9,14 @@ public class WebSocketApp {
 
   public static void main(String[] args) {
     var app = Javalin.create(config -> {
-      config.useVirtualThreads = true;
-
       config.staticFiles.add("/public", Location.CLASSPATH);
       config.staticFiles.enableWebjars();
     });
 
-    app.ws("/chat", ws -> {
-      ws.onMessage(ctx -> {
-        LOG.info("Received message: {}", ctx.message());
-        ctx.send(ctx.message());
-      });
-    });
+    app.ws("/chat", ws -> ws.onMessage(ctx -> {
+      LOG.info("Received message: {}", ctx.message());
+      ctx.send(ctx.message().toUpperCase());
+    }));
 
     app.start(9090);
   }

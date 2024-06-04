@@ -12,9 +12,7 @@ public class SecureApp {
 
   public static void main(String[] args) {
     var app = Javalin.create(config -> {
-      config.router.mount(router -> {
-        router.beforeMatched(AuthHandler::checkAccess);
-      });
+      config.router.mount(router -> router.beforeMatched(AuthHandler::checkAccess));
 
       config.router.apiBuilder(() -> {
         get("/", ctx -> ctx.redirect("/hello"), SecurityRole.ANYONE);
@@ -27,6 +25,7 @@ public class SecureApp {
     });
 
     app.start(8080);
+
     LOG.info("Secure server started!");
   }
 
