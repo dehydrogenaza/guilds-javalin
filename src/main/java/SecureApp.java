@@ -2,6 +2,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.javalin.Javalin;
+import io.javalin.community.ssl.SslPlugin;
 import io.javalin.http.Context;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
@@ -12,6 +13,8 @@ public class SecureApp {
 
   public static void main(String[] args) {
     var app = Javalin.create(config -> {
+//      config.registerPlugin(configureSsl());
+
       config.router.mount(router -> router.beforeMatched(AuthHandler::checkAccess));
 
       config.router.apiBuilder(() -> {
@@ -38,5 +41,12 @@ public class SecureApp {
         .get();
     EMPLOYEE_DAO.delete(id);
     ctx.status(204);
+  }
+
+  private static SslPlugin configureSsl() {
+    return new SslPlugin(config -> {
+      config.pemFromClasspath("ssl/cert.pem", "ssl/key.pem");
+      config.sniHostCheck = false;
+    });
   }
 }

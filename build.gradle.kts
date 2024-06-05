@@ -12,8 +12,9 @@ repositories {
 }
 
 dependencies {
-//    implementation("io.javalin:javalin:${javalinVersion}") //bare server
+//    implementation("io.javalin:javalin:${javalinVersion}") //bare routing
     implementation("io.javalin:javalin-bundle:${javalinVersion}") //+Jackson, Logback and some testing tools
+    implementation("io.javalin.community.ssl:ssl-plugin:${javalinVersion}")
 
     implementation("org.webjars.npm:bootstrap:5.3.3")
 
